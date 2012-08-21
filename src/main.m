@@ -49,9 +49,4 @@ for i=1:1:pps
 end
 
 hold
-plot(x,y,'rx')
-hold
-plot(p_x_1,p_y_1,'bx')
-hold
-plot(p_x_2,p_y_2,'bx')
-hold
+plot(x,y,'r')
