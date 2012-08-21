@@ -3,8 +3,8 @@ clear all;
 close all;
 
 k = [1 3 4 7 7.5 10 20 25];
-%k = [0 1 2 3 4 5 6 7];
-n = 4;
+%k = [0 1 2 3 4 5 6 7 9 10 11 12 13];
+n = 3;
 p_x_1 = [1 2 3 4];
 p_y_1 = [1 2 2.5 1.5];
 p_x_2 = [2 3 4 5.5];
@@ -12,8 +12,8 @@ p_y_2 = [2 2.5 1.5 3];
 
 pps = 100;
 
-x = size(1:1:401);
-y = size(1:1:401);
+x = size(1:1:length(k));
+y = size(1:1:length(k));
 x1 = size(1:1:pps);
 y1 = size(1:1:pps);
 x2 = size(1:1:pps);
@@ -30,9 +30,10 @@ for s=1:1:length(k)
     
     for i=1:1:pps
         t =T(i);
-     
+        
         x1(i) = pol_c(t,n,k,p_x_1);
         y1(i) = pol_c(t,n,k,p_y_1);
+        
         x2(i) = pol_c(t,n,k,p_x_2);
         y2(i) = pol_c(t,n,k,p_y_2);
         
@@ -43,10 +44,10 @@ for s=1:1:length(k)
 end
 
 for i=1:1:pps
-    x(count) = x1(i);
+    x(count) = x2(i);
     y(count) = y2(i);
     count = count +1;
 end
 
-hold
 plot(x,y,'r')
+hold
