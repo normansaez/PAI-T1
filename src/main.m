@@ -8,7 +8,7 @@ clear all;
 close all;
 
 k = [1 3 4 7 7.5 10 20 25];
-n = 3;
+n = 4;
 
 p_x_1 = [1 2 3 4];
 p_y_1 = [1 2 2.5 1.5];
@@ -61,6 +61,7 @@ plot(p_x_1,p_y_1,'b*')
 hold on
 plot(p_x_2,p_y_2,'b*')
 hold on
+print(gcf,'-dpsc2','../img/img1.eps');
 
 totaltime = toc;
 fprintf('\nExecution time %.2f[min] or %.2f [sec]\n', totaltime/60, totaltime);
