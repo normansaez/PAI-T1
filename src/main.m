@@ -1,9 +1,13 @@
 %% Procesamiento Avanzado de Imagenes
+%  Tarea N1
+%  mailto: nfsaez@uc.cl
+%%
+
+tic;
 clear all;
 close all;
 
 k = [1 3 4 7 7.5 10 20 25];
-%k = [0 1 2 3 4 5 6 7 9 10 11 12 13];
 n = 3;
 
 p_x_1 = [1 2 3 4];
@@ -13,8 +17,8 @@ p_y_2 = [2 2.5 1.5 3];
 
 pps = 100;
 
-x = size(1:1:length(k));
-y = size(1:1:length(k));
+x = size(1:1:length(k)*pps);
+y = size(1:1:length(k)*pps);
 x1 = size(1:1:pps);
 y1 = size(1:1:pps);
 x2 = size(1:1:pps);
@@ -47,8 +51,18 @@ end
 for i=1:1:pps
     x(count) = x2(i);
     y(count) = y2(i);
-    count = count +1;
+    count = count + 1;
 end
 
+figure, 
 plot(x,y,'r')
-hold
+hold on
+plot(p_x_1,p_y_1,'b*')
+hold on
+plot(p_x_2,p_y_2,'b*')
+hold on
+
+totaltime = toc;
+fprintf('\nExecution time %.2f[min] or %.2f [sec]\n', totaltime/60, totaltime);
+
+
