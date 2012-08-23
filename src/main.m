@@ -10,7 +10,9 @@ close all;
 % N_k nodes
 
 k = [1 3 4 7 7.5 10 20 25];
-% n grade-1
+%k = [0 1 2 3 4 5 6 7];
+
+% n = grade-1
 n = 4;
 
 % vector points seg 1: in x,y
@@ -43,7 +45,8 @@ b3_basis = size((length(k)-1)*pps,1);
 b4_basis = size((length(k)-1)*pps,1);
 t_basis = size((length(k)-1)*pps,1);
 
-% per each segment
+%% Question 1
+
 for s=1:1:length(k)
     try
         % make step per each k, (break when s+1 exceeds the vector)
@@ -97,7 +100,8 @@ for i=1:1:pps
     count = count + 1;
 end
 fprintf('Cox de Boor:\n#sums = %g\n#mult = %g\n',n_sum,n_mul);
-%Plot cuver in red. Control Points in blue
+
+%% Plot cuver in red. Control Points in blue
 figure, 
 plot(x,y,'r')
 hold on
@@ -107,7 +111,7 @@ plot(p_x_2,p_y_2,'b*')
 hold on
 print(gcf,'-dpsc2','../img/img1.eps');
 
-%%-----------------------------------------------------------------------------
+%% -----------------------------------------------------------------------------
 %Plot Basis
 figure,
 plot(t_basis, b1_basis,'r')
