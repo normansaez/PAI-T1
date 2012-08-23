@@ -124,7 +124,7 @@ plot(t_basis, b4_basis,'m')
 hold on
 print(gcf,'-dpsc2','../img/img2.eps');
 
-%%-----------------------------------------------------------------------------
+%% -----------------------------------------------------------------------------
 totaltime = toc;
 fprintf('\nExecution time %.2f[min] or %.2f [sec]\n', totaltime/60, totaltime);
 
