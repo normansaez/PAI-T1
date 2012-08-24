@@ -109,7 +109,7 @@ if p_1_cox_de_boor ==1
     
     %% Plot cuver in red. Control Points in blue
     figure,
-    plot(x,y,'r')
+    plot(x,y,'rx')
     hold on
     plot(p_x_1,p_y_1,'b*')
     hold on
@@ -172,8 +172,13 @@ if p_2_blossoming == 1
     end
     %% Plot cuver in red. Control Points in blue
     figure,
-    plot(x,y,'r')
+    plot(x,y,'rx')
     hold on
+    plot(p_x_1,p_y_1,'b*')
+    hold on
+    plot(p_x_2,p_y_2,'b*')
+    hold on
+    print(gcf,'-dpsc2','../img/img2.eps');
 end
 
 
@@ -191,13 +196,13 @@ if p_4_casteljau == 1
         x = casteljau(p_x_1,1,n-1,t);
         y = casteljau(p_y_1,1,n-1,t);
         
-        plot(x,y,'r')
+        plot(x,y,'rx')
         hold on
         
     end
     plot(p_x_1,p_y_1,'b*')
     hold on
-    print(gcf,'-dpsc2','../img/img.eps');
+    print(gcf,'-dpsc2','../img/img4.eps');
 end
 
 totaltime = toc;
