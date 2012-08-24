@@ -141,34 +141,36 @@ y1 = size(1:1:pps);
 x2 = size(1:1:pps);
 y2 = size(1:1:pps);
 count = 1;
-
+K = k/(max(k));
 if p_2_blossoming == 1
     for s=1:1:length(k)
         try
             % make step per each k, (break when s+1 exceeds the vector)
-            step = (k(s+1) - k(s))/pps;
+            step = (K(s+1) - K(s))/pps;
         catch err
             break
         end
         %Generate vector with t points between k(s+1) and k(s) with step (k(s+1) - k(s))/pps
-        T = k(s):step:k(s+1);
+        T = K(s):step:K(s+1);
+        
         for i=1:1:pps
             t = T(i);
-            x1(i) = polar_form(p_x_1,t,k);
-            y1(i) = polar_form(p_y_1,t,k);
+            fprintf('t(%g)=%g\n',i,t);
+            x1(i) = polar_form(p_x_1,t,K);
+            y1(i) = polar_form(p_y_1,t,K);
             x(count) = x1(i);
             y(count) = y1(i);
             count = count +1;
             if s == 7
-                x2(i) = polar_form(p_x_2,t,k);
-                y2(i) = polar_form(p_y_2,t,k);
+                x2(i) = polar_form(p_x_2,t,K);
+                y2(i) = polar_form(p_y_2,t,K);
             end          
         end
     end
     for i=1:1:pps
-        x(count) = x2(i);
-        y(count) = y2(i);
-        count = count + 1;
+       x(count) = x2(i);
+       y(count) = y2(i);
+       count = count + 1;
     end
     %% Plot cuver in red. Control Points in blue
     figure,
