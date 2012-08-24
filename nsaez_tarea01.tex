@@ -9,35 +9,29 @@
 \usepackage{graphicx}
 
 \title{Procesamiento Avanzado de Imágenes\\IEE3784}
-\author{\textbf{Tarea 01}\\Norman F. S\'aez\\nfsaez@uc.cl}
+\author{\textbf{Tarea 01}\\Norman F. Sáez\\nfsaez@uc.cl}
 \date{\today}
 
 \begin{document}
 \maketitle
 \section{Pregunta 1}
-Utilizando los puntos dados en la tarea y el vector de nodos, se obtienen los siguientes gráficos:
+Se utiliza el algoritmo de Cox de Boor para calcular tanto las bases como
+b-splines, de acuerdo a los puntos de control entregados en la tarea y el
+vector de nodos.  Se considera que en cada iteración, se hacen 5 sumas y  2
+multiplicaciones por coordenada ``x'', de esta manera, para 100 puntos un resultado de
+144 sumas por coordenada ``x'' y 60 multiplicaciones por
+coordenada ``x''. El total por coordenada es de \textbf{\textit{288
+sumas}} y \textbf{\textit{120 multiplicaciones}}, por cada \textbf{100 puntos}.
+El total de la curva de 400 puntos es de 1152 sumas y de 480 multiplicaciones.
+
 \begin{figure}[ht!]
   \centering
-  \subfloat[B-Splines]{\label{fig:img1}\includegraphics[width=0.50\textwidth]{img/img1.eps}}
+  \subfloat[B-Splines: Puntos de control en azul]{\label{fig:img1}\includegraphics[width=0.50\textwidth]{img/img1.eps}}
   ~ 
-  \subfloat[Bases]{\label{fig:img2}\includegraphics[width=0.50\textwidth]{img/img2.eps}}
+  \subfloat[Bases $B_{4,1}=rojo$, $B_{4,2}=verde$, $B_{4,3}=azul$, $B_{4,4}=magenta$]{\label{fig:img2}\includegraphics[width=0.50\textwidth]{img/img2.eps}}
   ~ 
   \caption{B-Splines y Bases}
   \label{fig:p1}
 \end{figure}
-La cantidad de sumas y de multiplicaciones para \textbf{100 puntos} son:
-\begin{itemize}
-\item \textbf{Sumas} 144
-\item \textbf{Multiplicaciones} 60
-\end{itemize} 
-Para encontrar los graficos asi como las bases se utilizo la tecnica como sigue:
-%Programe un software que construya B-splines cubicas no uniformes utilizando la recursion de Cox-de
-%Boor vista en clase:
-%Calcule el total de sumas y multiplicaciones necesarias para evaluar 100 puntos (por segmento) de
-%la B-spline cubica (considere el caso mas favorable en terminos de operaciones e incluya las operaciones
-%necesarias para construir las bases polinomiales).
-%Para efectos del informe escrito, gra que en dos guras separadas la B-spline y las bases construidas
-%con los siguientes puntos de control:
-%y con el siguiente vector de nodos [1 3 4 7 7.5 10 20 25]
 
 \end{document}
