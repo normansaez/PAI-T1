@@ -22,9 +22,10 @@ p_x_2 = [2 3 4 5.5];
 p_y_2 = [2 2.5 1.5 3];
 
 %% control vars:
-p_1_cox_de_boor = 0;
+p_1_cox_de_boor = 1;
 p_2_blossoming = 1;
 p_3_beizer = 0;
+p_4_casteljau = 1;
 
 if p_1_cox_de_boor ==1
     % sums and multiplication counters
@@ -114,7 +115,7 @@ if p_1_cox_de_boor ==1
     hold on
     plot(p_x_2,p_y_2,'b*')
     hold on
-    print(gcf,'-dpsc2','../img/img1.eps');
+    print(gcf,'-dpsc2','../img/img1a.eps');
     
     %% -----------------------------------------------------------------------------
     %Plot Basis
@@ -127,18 +128,63 @@ if p_1_cox_de_boor ==1
     hold on
     plot(t_basis, b4_basis,'m')
     hold on
-    print(gcf,'-dpsc2','../img/img2.eps');
+    print(gcf,'-dpsc2','../img/img1b.eps');
     %% -----------------------------------------------------------------------------
 end
 
 %% Blossoming
-if p_2_blossoming == 1
-    n = 5;
-pps = 100;
-% vector points seg 1: in x,y
-p_x_1 = [1 2 3 4 5.5];
-p_y_1 = [1 2 2.5 1.5 3];
+pps =100;
+x = size(1:1:length(k)*pps);
+y = size(1:1:length(k)*pps);
+x1 = size(1:1:pps);
+y1 = size(1:1:pps);
+x2 = size(1:1:pps);
+y2 = size(1:1:pps);
+count = 1;
 
+if p_2_blossoming == 1
+    for s=1:1:length(k)
+        try
+            % make step per each k, (break when s+1 exceeds the vector)
+            step = (k(s+1) - k(s))/pps;
+        catch err
+            break
+        end
+        %Generate vector with t points between k(s+1) and k(s) with step (k(s+1) - k(s))/pps
+        T = k(s):step:k(s+1);
+        for i=1:1:pps
+            t = T(i);
+            x1(i) = polar_form(p_x_1,t,k);
+            y1(i) = polar_form(p_y_1,t,k);
+            x(count) = x1(i);
+            y(count) = y1(i);
+            count = count +1;
+            if s == 7
+                x2(i) = polar_form(p_x_2,t,k);
+                y2(i) = polar_form(p_y_2,t,k);
+            end          
+        end
+    end
+    for i=1:1:pps
+        x(count) = x2(i);
+        y(count) = y2(i);
+        count = count + 1;
+    end
+    %% Plot cuver in red. Control Points in blue
+    figure,
+    plot(x,y,'r')
+    hold on
+end
+
+
+%% Casteljau
+if p_4_casteljau == 1
+    n = 5;
+    pps = 100;
+    % vector points seg 1: in x,y
+    p_x_1 = [1 2 3 4 5.5];
+    p_y_1 = [1 2 2.5 1.5 3];
+    
     figure,
     for i=1:1:pps
         t = i/(pps-1);
@@ -151,7 +197,7 @@ p_y_1 = [1 2 2.5 1.5 3];
     end
     plot(p_x_1,p_y_1,'b*')
     hold on
-    print(gcf,'-dpsc2','../img/img3.eps');
+    print(gcf,'-dpsc2','../img/img.eps');
 end
 
 totaltime = toc;
