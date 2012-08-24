@@ -24,7 +24,7 @@ p_y_2 = [2 2.5 1.5 3];
 %% control vars:
 p_1_cox_de_boor = 1;
 p_2_blossoming = 1;
-p_3_beizer = 0;
+p_3_beizer = 1;
 p_4_casteljau = 1;
 
 if p_1_cox_de_boor ==1
@@ -143,6 +143,7 @@ y2 = size(1:1:pps);
 count = 1;
 K = k/(max(k));
 if p_2_blossoming == 1
+    fprintf('Polar Form');
     for s=1:1:length(k)
         try
             % make step per each k, (break when s+1 exceeds the vector)
@@ -155,7 +156,6 @@ if p_2_blossoming == 1
         
         for i=1:1:pps
             t = T(i);
-            fprintf('t(%g)=%g\n',i,t);
             x1(i) = polar_form(p_x_1,t,K);
             y1(i) = polar_form(p_y_1,t,K);
             x(count) = x1(i);
@@ -164,13 +164,13 @@ if p_2_blossoming == 1
             if s == 7
                 x2(i) = polar_form(p_x_2,t,K);
                 y2(i) = polar_form(p_y_2,t,K);
-            end          
+            end
         end
     end
     for i=1:1:pps
-       x(count) = x2(i);
-       y(count) = y2(i);
-       count = count + 1;
+        x(count) = x2(i);
+        y(count) = y2(i);
+        count = count + 1;
     end
     %% Plot cuver in red. Control Points in blue
     figure,
@@ -183,9 +183,23 @@ if p_2_blossoming == 1
     print(gcf,'-dpsc2','../img/img2.eps');
 end
 
+%% Bezier
+if p_3_beizer==1
+    fprintf('Finding Control Points: Bezier splines');
+    t = sym('t');
+    T = [t^3 t^2 t 1];
+    cte = 1/6;
+    bases = [-1 3 -3 1 0 0 0;0 3 -6 3 0 0 0; 0 0 -3 0 3 0 0; 0 0 0 1 4 1 0];
+    %bases = [-1 3 -3 1;3 -6 3 0 ; -3 0 3 0; 1 4 1 0];
+    % We know: t, and (x, y) = C(t)
+    x = 1;
+    y = 1;
+    temp = (cte*T*bases)
+end
 
 %% Casteljau
 if p_4_casteljau == 1
+    fprintf('Castejau: Bezier splines');
     n = 5;
     pps = 100;
     % vector points seg 1: in x,y
